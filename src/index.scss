@@ -17,7 +17,8 @@
 
 *,
 *::after,
-*::before {
+*::before,
+*:disabled {
   margin: 0;
   padding: 0;
   border: none;
@@ -25,6 +26,7 @@
   box-sizing: border-box;
   text-decoration: none;
   background: none;
+  color: unset;
 }
 
 body {
@@ -70,4 +72,8 @@ h6 {
 button:hover,
 a:hover {
   cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
 }

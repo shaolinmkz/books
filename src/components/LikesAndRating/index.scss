@@ -1,0 +1,45 @@
+.more-book-info {
+  display: flex;
+
+  span {
+    display: inline-block;
+    font-size: var(--fs12);
+  }
+
+  .like-and-purchase {
+    display: flex;
+
+    > div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-right: 10px;
+
+      img {
+        width: 18.67px;
+        height: 14px;
+      }
+
+      span {
+        margin-top: 8px;
+      }
+    }
+  }
+
+  .ratings {
+    border-left: 1px solid #333;
+    padding-left: 10px;
+    display: flex;
+    flex-direction: column;
+
+    .rating-info {
+      display: flex;
+      align-items: center;
+      margin-bottom: 6px;
+
+      h4 {
+        margin-right: 5px;
+      }
+    }
+  }
+}

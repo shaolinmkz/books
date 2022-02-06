@@ -5,4 +5,11 @@
     margin: 0 52px 23px 52px;
     border-bottom: 1px solid #eee;
   }
+
+  .all-books-wrapper {
+    padding: 0 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+  }
 }

@@ -28,7 +28,7 @@ const Star = ({ ratio, parentProps, childProps }: IStarProps) => {
 interface IStarsProps {
   backgroundColor?: string;
   color?: string;
-  rating: number;
+  rating?: number;
 }
 
 const Stars = ({ rating, color, backgroundColor }: IStarsProps) => {
@@ -41,8 +41,8 @@ const Stars = ({ rating, color, backgroundColor }: IStarsProps) => {
   if(color) childProps.backgroundColor = color;
 
   useEffect(() => {
-    const whole = Math.floor(rating);
-    const fraction = rating - whole;
+    const whole = Math.floor(Number(rating));
+    const fraction = Number(rating) - whole;
 
     const stars = [];
     for (let i = 0; i < whole; i++) {

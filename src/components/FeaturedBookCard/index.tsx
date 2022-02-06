@@ -1,7 +1,8 @@
-import Stars from "../Stars";
 import { IFeaturedBooks } from "../../interfaces";
 import peopleWhite from "../../assets/people-white.svg";
 import likeWhite from "../../assets/like-white.svg";
+import { extractAndMergeNames, dateUtil } from "../../utils";
+import LikesAndRating from "../LikesAndRating";
 import "./index.scss";
 
 interface IProps {
@@ -9,11 +10,6 @@ interface IProps {
 }
 
 const FeaturedBookCard = ({ book }: IProps) => {
-
-  const extractName = (data: { id: string, name: string }[]) => {
-      return data.map(({ name }) => name).join(", ");
-  }
-
   return (
     <div className="featured-book-card">
       <img alt="" src={book.image_url} />
@@ -23,41 +19,27 @@ const FeaturedBookCard = ({ book }: IProps) => {
 
         <div className="author-info">
           <h3 className="book-title">{book.title}</h3>
-          <p className="author">{extractName(book.authors)}</p>
-          <span className="year">2016</span>
+          <p className="author">{extractAndMergeNames(book.authors)}</p>
+          <span className="year">
+            {dateUtil(book.release_date).getFullYear()}
+          </span>
         </div>
 
         <div className="genre-info">
           <h4 className="sub-title">Genre</h4>
-          <span className="genre">{extractName(book.genres)}</span>
+          <span className="genre">{extractAndMergeNames(book.genres)}</span>
         </div>
 
         <div className="tag-info">
           <h4 className="sub-title">Tags</h4>
-          <span className="tags">{extractName(book.tags)}</span>
+          <span className="tags">{extractAndMergeNames(book.tags)}</span>
         </div>
 
-        <div className="more-book-info">
-          <div className="like-and-purchase">
-            <div>
-              <img src={peopleWhite} alt="" />
-              <span className="user-purchase">{book.number_of_purchases}</span>
-            </div>
-            <div>
-              <img src={likeWhite} alt="" />
-              <span className="likes">{book.likes}</span>
-            </div>
-          </div>
-
-          <div className="ratings">
-            <div className="rating-info">
-              <h4 className="sub-title">Ratings:</h4>
-              <span>{book.rating}</span>
-            </div>
-
-            <Stars rating={book.rating} />
-          </div>
-        </div>
+        <LikesAndRating
+          peopleIcon={peopleWhite}
+          likeIcon={likeWhite}
+          book={book}
+        />
       </div>
     </div>
   );

@@ -46,6 +46,42 @@ export const GET_BOOKS = gql`
 }
 `;
 
+export const GET_BOOK = gql`
+  query Book ($id: ID!) {
+  book (id: $id) {
+    id
+    created_at
+    updated_at
+    title
+    subtitle
+    publisher
+    release_date
+    number_of_purchases
+    likes
+    rating
+    price
+    currency
+    available_copies
+    full_description
+    featured
+    image_url
+    published_at
+    authors {
+      id
+      name
+    }
+    tags {
+      id
+      name
+    }
+    genres{
+      id
+      name
+    }
+  }
+}
+`;
+
 export const GET_FEATURED_BOOKS = gql`
   query FeaturedBooks (
     $sort: String,
@@ -71,6 +107,7 @@ export const GET_FEATURED_BOOKS = gql`
     price
     featured
     image_url
+    published_at
     authors {
       id
       name
