@@ -141,8 +141,11 @@
   .cart-container {
     background: var(--white);
     width: 480px;
-    height: 100%;
+    max-height: 100%;
     position: absolute;
+    overflow: auto;
+    bottom: 0;
+    top: 0;
 
     &.slide-in {
       animation: slide-in 0.3s linear forwards;
@@ -186,6 +189,8 @@
       width: 100%;
       background: var(--white);
       box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.05);
+      position: sticky;
+      top: 0;
 
       .back-btn {
         display: flex;
@@ -328,7 +333,7 @@
     }
 
     .btn-container {
-      margin-top: 18px;
+      margin: 20px 0;
 
       button {
         background: var(--black);

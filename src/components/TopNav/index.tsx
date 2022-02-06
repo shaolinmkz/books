@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import whiteLogoIcon from "../../assets/logo-white-bg.svg";
@@ -27,6 +28,14 @@ const TopNav = () => {
   const handleOpenCloseCart = (value: boolean) => {
     dispatch({ type: OPEN_CLOSE_CART, payload: value });
   };
+
+  useEffect(() => {
+    if(isCartOpen) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = "auto"
+    }
+  }, [isCartOpen])
 
   return (
     <>
