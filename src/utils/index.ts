@@ -24,3 +24,15 @@ export const calculateSubtotal = (cart: ICartBook[]) => {
 export const calculateCartSize = (cart: ICartBook[]) => {
   return cart.reduce((accumulator, { count }: ICartBook) => accumulator + count, 0)
 }
+
+export const extractQueryValue = (value: string, key = 'search') => {
+  return new URLSearchParams(value).get(key) || ""
+}
+
+export const disableBodyScroll = (condition: boolean | null) => {
+  if (condition) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "auto";
+  }
+}

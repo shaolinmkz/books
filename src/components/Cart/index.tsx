@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 import cartIcon from "../../assets/cart.svg";
 import backIcon from "../../assets/back.svg";
 import cartWhiteIcon from "../../assets/cart-white.svg";
@@ -11,6 +13,7 @@ import {
 import {
   calculateSubtotal,
   currencyFormatter,
+  disableBodyScroll,
   ternaryResolver,
 } from "../../utils";
 import "./index.scss";
@@ -27,12 +30,18 @@ const Cart = () => {
   const handleRemove = (item: ICartBook) => {
     dispatch({ type: REMOVE_FROM_CART, payload: item });
   };
+
   const handleIncrement = (item: ICartBook) => {
     dispatch({ type: ADD_TO_CART, payload: item });
   };
+
   const handleDecrement = (item: ICartBook) => {
     dispatch({ type: DECREMENT_CART_ITEM, payload: item });
   };
+
+  useEffect(() => {
+    disableBodyScroll(isCartOpen);
+  }, [isCartOpen]);
 
   return (
     <div

@@ -1,10 +1,11 @@
 import { Dispatch } from "react";
-import { ICartBook } from "../interfaces";
+import { IBooks, ICartBook } from "../interfaces";
 import {
   OPEN_CLOSE_CART,
   ADD_TO_CART,
   DECREMENT_CART_ITEM,
   REMOVE_FROM_CART,
+  SEARCH_BOOKS,
 } from "./types";
 
 
@@ -17,6 +18,7 @@ export const initialState = {
   isCartOpen: null as (boolean | null),
   cart: [] as ICartBook[],
   dispatch: (() => { }) as Dispatch<IAction>,
+  searchedBooks: [] as (IBooks[] | [])
 };
 
 
@@ -65,6 +67,11 @@ const appReducer = (state = initialState, { type, payload }: IAction) => {
         cart: state.cart.filter((item: ICartBook) => item.id !== castPayload.id),
       }
     }
+    case SEARCH_BOOKS:
+      return {
+        ...state,
+        searchedBooks: payload,
+      }
     default:
       return state
   }
