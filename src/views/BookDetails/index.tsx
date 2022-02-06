@@ -8,10 +8,12 @@ import cartWhite from "../../assets/cart-white.svg";
 import peopleBlack from "../../assets/people-black.svg";
 import likeBlack from "../../assets/like-black.svg";
 import { BooksLoader } from "../../components/Loaders";
-import "./index.scss";
 import { currencyFormatter, dateUtil } from "../../utils";
 import { extractAndMergeNames } from "../../utils/index";
 import LikesAndRating from "../../components/LikesAndRating";
+import "./index.scss";
+import { useAppData } from "../../hooks/useAppData";
+import { ADD_TO_CART, OPEN_CLOSE_CART } from "../../appContext/types";
 
 const months = [
   "january",
@@ -30,12 +32,18 @@ const months = [
 
 const BookDetails = () => {
   const { goBack } = useHistory();
+  const { dispatch } = useAppData();
   const { bookId } = useParams<{ bookId: string }>();
   const { loading, data } = useQuery<{ book: IBooks }>(GET_BOOK, {
     variables: {
       id: bookId,
     },
   });
+
+  const handleAddToCart = (book?: IBooks) => {
+    dispatch({ type: ADD_TO_CART, payload: book });
+    dispatch({ type: OPEN_CLOSE_CART, payload: true });
+  };
 
   return (
     <div className="book-details-container">
@@ -70,7 +78,7 @@ const BookDetails = () => {
               {currencyFormatter(data?.book.price, data?.book.currency)}
             </p>
 
-            <button type="button">
+            <button type="button" onClick={() => handleAddToCart(data?.book)}>
               <img src={cartWhite} alt="" />
               <span>Add to Cart</span>
             </button>

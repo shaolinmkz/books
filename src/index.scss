@@ -5,6 +5,7 @@
   --white: #fff;
   --grey: #aaa;
   --star: #EBA430;
+  --red: #C12300;
   --border: rgb(235, 235, 235);
   --default-font-size: 12px;
   --fs36: 36px;
@@ -76,4 +77,10 @@ a:hover {
 
 button:disabled {
   cursor: not-allowed;
+}
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

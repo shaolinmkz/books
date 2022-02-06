@@ -8,10 +8,13 @@ import BookCarousel from "../../components/BookCarousel";
 import { BooksLoader } from "../../components/Loaders";
 import BookCard from "../../components/BookCard";
 import "./index.scss";
+import { useAppData } from "../../hooks/useAppData";
+import { ADD_TO_CART, OPEN_CLOSE_CART } from "../../appContext/types";
 
-const Home = ({}) => {
+const Home = () => {
   const { push } = useHistory();
   const { loading, data } = useQuery(GET_BOOKS);
+  const { dispatch } = useAppData();
 
   useEffect(() => {}, []);
 
@@ -20,7 +23,8 @@ const Home = ({}) => {
   };
 
   const handleAddToCart = (book: IBooks) => {
-    console.log(book)
+    dispatch({ type: ADD_TO_CART, payload: book });
+    dispatch({ type: OPEN_CLOSE_CART, payload: true });
   };
 
   return (

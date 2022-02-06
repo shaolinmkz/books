@@ -26,6 +26,10 @@ export interface IBooks {
   genres: IAuthorTagGenre[]
 }
 
+export interface ICartBook extends IBooks {
+  count: number;
+}
+
 export interface IFeaturedBooks {
   id: string;
   created_at: string;
