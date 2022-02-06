@@ -345,6 +345,10 @@
         align-items: center;
         gap: 100px;
 
+        @media (max-width: 768px) {
+          gap: 40px
+        }
+
         img {
           width: 18.32px;
           height: 20px;

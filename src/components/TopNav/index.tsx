@@ -11,6 +11,7 @@ import { useAppData } from "../../hooks/useAppData";
 import {
   OPEN_CLOSE_CART,
   ADD_TO_CART,
+  DECREMENT_CART_ITEM,
   REMOVE_FROM_CART,
 } from "../../appContext/types";
 import {
@@ -30,12 +31,12 @@ const TopNav = () => {
   };
 
   useEffect(() => {
-    if(isCartOpen) {
-      document.body.style.overflow = "hidden"
+    if (isCartOpen) {
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "auto"
+      document.body.style.overflow = "auto";
     }
-  }, [isCartOpen])
+  }, [isCartOpen]);
 
   return (
     <>
@@ -115,7 +116,14 @@ const TopNav = () => {
                           {extractAndMergeNames(item.authors)}
                         </p>
                       </section>
-                      <button type="button">Remove</button>
+                      <button
+                        type="button"
+                        onClick={() =>
+                          dispatch({ type: REMOVE_FROM_CART, payload: item })
+                        }
+                      >
+                        Remove
+                      </button>
                     </div>
 
                     <div className="price-and-actions">
@@ -131,7 +139,7 @@ const TopNav = () => {
                             className="decrement"
                             onClick={() =>
                               dispatch({
-                                type: REMOVE_FROM_CART,
+                                type: DECREMENT_CART_ITEM,
                                 payload: item,
                               })
                             }

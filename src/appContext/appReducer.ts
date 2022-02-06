@@ -3,6 +3,7 @@ import { ICartBook } from "../interfaces";
 import {
   OPEN_CLOSE_CART,
   ADD_TO_CART,
+  DECREMENT_CART_ITEM,
   REMOVE_FROM_CART,
 } from "./types";
 
@@ -41,7 +42,7 @@ const appReducer = (state = initialState, { type, payload }: IAction) => {
         cart: foundBook ? foundBookAndIncrement : [...state.cart, modifiedBook]
       }
     }
-    case REMOVE_FROM_CART: {
+    case DECREMENT_CART_ITEM: {
       const castPayload: ICartBook = payload;
       const foundBook = state.cart.find((item) => item.id === castPayload.id);
 
@@ -54,6 +55,14 @@ const appReducer = (state = initialState, { type, payload }: IAction) => {
         cart: state.cart
           .map((item: ICartBook) => item.id === modifiedBook.id ? modifiedBook : item)
           .filter((item: ICartBook) => item.count === 0 ? false : true),
+      }
+    }
+    case REMOVE_FROM_CART: {
+      const castPayload: ICartBook = payload;
+
+      return {
+        ...state,
+        cart: state.cart.filter((item: ICartBook) => item.id !== castPayload.id),
       }
     }
     default:
