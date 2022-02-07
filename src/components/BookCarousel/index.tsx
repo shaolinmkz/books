@@ -45,18 +45,15 @@ const BookCarousel = () => {
   }, [data?.books.length]);
 
   const handleClick = (direction: number) => {
-    const {
-      scrollWidth,
-      visibleBooksOnscreen,
-      maxClickable
-    } = getResolvedScreenValues();
+    const { scrollWidth, visibleBooksOnscreen, maxClickable, bookWidth } =
+      getResolvedScreenValues();
 
     if (!scrollWidth) return;
     if (direction === -1 && state.clickValue === 0) return;
     if (direction === +1 && state.clickValue === maxClickable) return;
 
     setState((prevState) => {
-      const newScroll = prevState.scrollValue + direction * 240;
+      const newScroll = prevState.scrollValue + direction * bookWidth;
       const newClickValue = prevState.clickValue + direction;
 
       carouselRef.current?.scrollTo({
@@ -80,10 +77,9 @@ const BookCarousel = () => {
     });
   };
 
-  useEffect(() => {
-    const { visibleBooksOnscreen } = getResolvedScreenValues();
-
+  const initialize = useCallback(() => {
     if (data?.books) {
+      const { visibleBooksOnscreen } = getResolvedScreenValues();
       setPositions(
         data.books.map((_: IFeaturedBooks, index: number) => ({
           id: index + 1,
@@ -92,6 +88,14 @@ const BookCarousel = () => {
       );
     }
   }, [data?.books, getResolvedScreenValues]);
+
+  useEffect(() => {
+    initialize();
+
+    document.body.onresize = () => {
+      initialize();
+    };
+  }, [data?.books, initialize]);
 
   return loading ? (
     <HorizontalSkeletonLoader />
