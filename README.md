@@ -18,4 +18,5 @@ Deployed Link: [qbooks](https://qbooks.netlify.app)
 
 
 ## Feedback
-- I believe the exercise was great and flexible, giving room for self-innovation.
+- The assessment was great and flexible, giving room for self-innovation and I really enjoyed it.
+- It will be nice if the `Add to Cart` buttons on the index page has a visible clickable area.

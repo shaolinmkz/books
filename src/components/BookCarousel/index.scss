@@ -3,19 +3,19 @@
 
   button {
     position: absolute;
-    background: linear-gradient(
-      180deg,
-      rgba(248, 248, 250, 0.8) 0%,
-      #f8f8fa 51.36%,
-      rgba(248, 248, 250, 0.8) 100%
-    );
+    background: rgba(248, 248, 250, 0.8);
     mix-blend-mode: normal;
     top: 0;
     bottom: 0;
     width: 40px;
     z-index: 1;
 
+    &:nth-child(1) {
+      border-right: 1px solid #fff;
+    }
+
     &:nth-child(2) {
+      border-left: 1px solid #fff;
       right: 0;
     }
 
@@ -25,6 +25,7 @@
       height: 0;
       border-top: 10px solid transparent;
       border-bottom: 10px solid transparent;
+      transform: scale(0.5);
 
       &.prev {
         border-right: 10px solid var(--black);
