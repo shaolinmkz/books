@@ -37,7 +37,7 @@ const Home = () => {
       <BookCarousel />
       <h3>All Books</h3>
       <div className="all-books-wrapper">
-        {(loading && books.length) ? (
+        {loading ? (
           <>
             <BooksLoader />
             <BooksLoader />
