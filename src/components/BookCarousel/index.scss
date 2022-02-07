@@ -40,6 +40,11 @@
     overflow: hidden;
     scroll-snap-type: x mandatory;
     display: flex;
+    height: 400px;
+
+    @media (max-width: 768px) {
+      height: 260px;
+    }
 
     a {
       color: var(--white);
@@ -51,7 +56,6 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    margin-top: 42px;
     margin-bottom: 20px;
 
     span {
