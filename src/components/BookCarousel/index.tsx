@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef, useCallback } from "react";
-import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
+
 import { GET_FEATURED_BOOKS } from "../../gql/queries";
 import FeaturedBookCard from "../FeaturedBookCard";
 import { IFeaturedBooks } from "../../interfaces";
@@ -110,9 +110,9 @@ const BookCarousel = () => {
 
       <div className="carousel" ref={carouselRef}>
         {data?.books.map((book: IFeaturedBooks) => (
-          <Link key={book.id} to={`/books/${book.id}`}>
+          <div key={book.id}>
             <FeaturedBookCard book={book} />
-          </Link>
+          </div>
         ))}
       </div>
 
