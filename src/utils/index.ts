@@ -37,8 +37,12 @@ export const disableBodyScroll = (condition: boolean | null) => {
   }
 }
 
-export const findMatch = (data: { id: string; name: string }[], query: string) => {
+export const findNameMatch = (data: { id: string; name: string }[], query: string) => {
   return data.find(({ name }) => name.toLowerCase().includes(query));
+};
+
+export const findBookMatch = (bookId: string, data: IBooks[]) => {
+  return data.find(({ id }) => id === bookId);
 };
 
 export const combineBookSearch = (books: IBooks[], search: string): Promise<IBooks[] | []> => {
@@ -46,9 +50,9 @@ export const combineBookSearch = (books: IBooks[], search: string): Promise<IBoo
     const searchTerm = extractQueryValue(search).toLowerCase();
     const searchData = books.filter(({ title, authors, genres, tags }) => {
       const matchTitle = title.toLowerCase().includes(searchTerm);
-      const matchAuthors = findMatch(authors, searchTerm);
-      const matchGenres = findMatch(genres, searchTerm);
-      const matchTags = findMatch(tags, searchTerm);
+      const matchAuthors = findNameMatch(authors, searchTerm);
+      const matchGenres = findNameMatch(genres, searchTerm);
+      const matchTags = findNameMatch(tags, searchTerm);
 
       return [
         matchTitle,

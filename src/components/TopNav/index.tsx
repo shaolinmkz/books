@@ -11,6 +11,7 @@ import SearchInput from "../SearchInput";
 import { useAppData } from "../../hooks/useAppData";
 import {
   ADD_TO_CART,
+  GET_ALL_BOOKS,
   OPEN_CLOSE_CART,
   SEARCH_BOOKS,
   SEARCH_INPUT_OPEN,
@@ -36,6 +37,7 @@ const TopNav = () => {
     cart,
     searchedBooks,
     searchInputOpen: inputOpen,
+    books: allBooks,
   } = useAppData();
 
   const { data, loading } = useQuery(GET_BOOKS, {
@@ -77,11 +79,13 @@ const TopNav = () => {
     const ready = !!data?.books && !!extractQueryValue(search);
 
     if (ready) {
-      combineBookSearch(data.books, search).then((books) => {
+      dispatch({ type: GET_ALL_BOOKS, payload: data.books });
+
+      combineBookSearch(allBooks, search).then((books) => {
         dispatch({ type: SEARCH_BOOKS, payload: books });
       });
     }
-  }, [data?.books, dispatch, search]);
+  }, [allBooks, data?.books, dispatch, search]);
 
   return (
     <>

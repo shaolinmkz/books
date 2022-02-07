@@ -9,14 +9,18 @@ import { BooksLoader } from "../../components/Loaders";
 import BookCard from "../../components/BookCard";
 import "./index.scss";
 import { useAppData } from "../../hooks/useAppData";
-import { ADD_TO_CART, OPEN_CLOSE_CART } from "../../appContext/types";
+import { ADD_TO_CART, OPEN_CLOSE_CART, GET_ALL_BOOKS } from "../../appContext/types";
 
 const Home = () => {
   const { push } = useHistory();
   const { loading, data } = useQuery(GET_BOOKS);
-  const { dispatch } = useAppData();
+  const { dispatch, books } = useAppData();
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if(data?.books && !loading) {
+      dispatch({ type: GET_ALL_BOOKS, payload: data.books });
+    }
+  }, [data?.books, dispatch, loading]);
 
   const handleViewBook = (bookId: string) => {
     push(`/books/${bookId}`);
@@ -33,13 +37,13 @@ const Home = () => {
       <BookCarousel />
       <h3>All Books</h3>
       <div className="all-books-wrapper">
-        {loading ? (
+        {(loading && books.length) ? (
           <>
             <BooksLoader />
             <BooksLoader />
           </>
         ) : (
-          data?.books.map((book: IBooks) => (
+          books.map((book: IBooks) => (
             <BookCard
               key={book.id}
               book={book}

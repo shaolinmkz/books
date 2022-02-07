@@ -37,7 +37,12 @@ const Cart = ({ item, onCartRemove, onIncrement, onDecrement }: IProps) => {
                 -
               </button>
               <span>{item.count}</span>
-              <button type="button" className="increment" onClick={onIncrement}>
+              <button
+                disabled={!item.available_copies}
+                type="button"
+                className="increment"
+                onClick={onIncrement}
+              >
                 +
               </button>
             </div>

@@ -1,10 +1,6 @@
 .book-details-container {
   padding: 40px;
 
-  @media (max-width: 450px) {
-    padding: 40px 20px;
-  }
-
   .back-btn-container {
     margin-bottom: 40px;
 
@@ -21,14 +17,18 @@
     display: flex;
     gap: 100px;
     flex-wrap: wrap;
-    --bdwidth: 243px;
 
     @media (max-width: 768px) {
-      gap: 50px;
+      gap: 30px;
     }
 
     .book-display {
-      width: var(--bdwidth);
+      width: 243px;
+
+      @media (max-width: 768px) {
+        width: 133.33px;
+      }
+
       img {
         width: 100%;
         height: 364.5px;
@@ -36,6 +36,7 @@
         margin-bottom: 73px;
 
         @media (max-width: 768px) {
+          height: 200px;
           margin-bottom: 0px;
         }
       }
@@ -123,13 +124,10 @@
         justify-content: space-between;
 
         @media (max-width: 768px) {
+          justify-content: flex-start;
           flex-wrap: wrap;
           gap: 30px;
-          border-bottom: none;
-        }
-
-        @media (max-width: 450px) {
-          margin-bottom: 0;
+          margin-bottom: 30px;
         }
 
         .ratings {
@@ -142,20 +140,6 @@
           justify-content: space-between;
           gap: 10px;
 
-          @media (max-width: 768px) {
-            &.released {
-              display: none;
-            }
-
-            &.publisher {
-              display: none;
-            }
-          }
-
-          @media (max-width: 375px) {
-            width: 120px;
-          }
-
           p {
             text-transform: capitalize;
             text-overflow: ellipsis;
@@ -167,6 +151,10 @@
       }
 
       .full_description {
+        @media (max-width: 768px) {
+          padding-bottom: 100px;
+        }
+
         p {
           font-size: var(--fs14);
           line-height: 150%;
@@ -181,6 +169,10 @@
 
   @media (max-width: 768px) {
     display: block;
+    position: fixed;
+    bottom: -30px;
+    left: 20px;
+    right: 20px;
   }
 
   button {
