@@ -1,4 +1,4 @@
-import { IAuthorTagGenre, ICartBook } from "../interfaces";
+import { IAuthorTagGenre, IBooks, ICartBook } from "../interfaces";
 
 export const extractAndMergeNames = (data?: IAuthorTagGenre[]) => {
   return data?.map(({ name }) => name).join(", ");
@@ -36,3 +36,28 @@ export const disableBodyScroll = (condition: boolean | null) => {
     document.body.style.overflow = "auto";
   }
 }
+
+export const findMatch = (data: { id: string; name: string }[], query: string) => {
+  return data.find(({ name }) => name.toLowerCase().includes(query));
+};
+
+export const combineBookSearch = (books: IBooks[], search: string): Promise<IBooks[] | []> => {
+  return new Promise((resolve) => {
+    const searchTerm = extractQueryValue(search).toLowerCase();
+    const searchData = books.filter(({ title, authors, genres, tags }) => {
+      const matchTitle = title.toLowerCase().includes(searchTerm);
+      const matchAuthors = findMatch(authors, searchTerm);
+      const matchGenres = findMatch(genres, searchTerm);
+      const matchTags = findMatch(tags, searchTerm);
+
+      return [
+        matchTitle,
+        !!matchAuthors,
+        !!matchGenres,
+        !!matchTags,
+      ].includes(true);
+    });
+
+    resolve(searchData);
+  });
+};

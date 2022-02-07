@@ -165,6 +165,7 @@
         display: flex;
         align-items: center;
         gap: 100px;
+        box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.1);
 
         @media (max-width: 768px) {
           gap: 40px;

@@ -4,6 +4,8 @@ import cartIcon from "../../assets/cart.svg";
 import likeBlack from "../../assets/like-black.svg";
 import { extractAndMergeNames, dateUtil, currencyFormatter } from "../../utils";
 import { IBooks } from "../../interfaces";
+import { SEARCH_INPUT_OPEN } from "../../appContext/types";
+import { useAppData } from '../../hooks/useAppData';
 import "./index.scss";
 
 interface IProps {
@@ -13,8 +15,13 @@ interface IProps {
 }
 
 const BookCard = ({ book, onViewClick, onAddToCartClick }: IProps) => {
+  const { dispatch } = useAppData();
+
   return (
-    <div className="book-card" onClick={onViewClick}>
+    <div className="book-card" onClick={() => {
+      onViewClick();
+      dispatch({ type: SEARCH_INPUT_OPEN, payload: false });
+    }}>
       <img src={book.image_url} alt="" />
       <div className="book-card-info">
         <h4>{book.title}</h4>

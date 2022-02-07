@@ -33,6 +33,11 @@
       h2 {
         color: var(--black);
         font-weight: 400;
+
+        @media (max-width: 450px) {
+          font-weight: 700;
+          font-size: var(--fs14);
+        }
       }
       p {
         color: var(--grey);

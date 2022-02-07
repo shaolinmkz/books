@@ -6,6 +6,7 @@ import {
   DECREMENT_CART_ITEM,
   REMOVE_FROM_CART,
   SEARCH_BOOKS,
+  SEARCH_INPUT_OPEN,
 } from "./types";
 
 
@@ -18,7 +19,8 @@ export const initialState = {
   isCartOpen: null as (boolean | null),
   cart: [] as ICartBook[],
   dispatch: (() => { }) as Dispatch<IAction>,
-  searchedBooks: [] as (IBooks[] | [])
+  searchedBooks: [] as (IBooks[] | []),
+  searchInputOpen: false,
 };
 
 
@@ -71,6 +73,11 @@ const appReducer = (state = initialState, { type, payload }: IAction) => {
       return {
         ...state,
         searchedBooks: payload,
+      }
+    case SEARCH_INPUT_OPEN:
+      return {
+        ...state,
+        searchInputOpen: payload,
       }
     default:
       return state

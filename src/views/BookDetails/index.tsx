@@ -78,15 +78,19 @@ const BookDetails = () => {
               {currencyFormatter(data?.book.price, data?.book.currency)}
             </p>
 
-            <button type="button" onClick={() => handleAddToCart(data?.book)}>
+            <button
+              disabled={!data?.book.available_copies}
+              type="button"
+              onClick={() => handleAddToCart(data?.book)}
+            >
               <img src={cartWhite} alt="" />
               <span>Add to Cart</span>
             </button>
           </aside>
 
           <aside className="book-details">
-            <h1 className="book-title">{`${data?.book.title}: ${
-              data?.book.subtitle || ""
+            <h1 className="book-title">{`${data?.book.title}${
+              data?.book.subtitle ? `: ${data?.book.subtitle}` : ""
             }`}</h1>
             <h4 className="author">
               {extractAndMergeNames(data?.book.authors)}
@@ -104,7 +108,7 @@ const BookDetails = () => {
               />
 
               <section
-                className="generic-book-info"
+                className="generic-book-info genre"
                 title={extractAndMergeNames(data?.book.genres)}
               >
                 <h4>Genre</h4>
@@ -114,7 +118,7 @@ const BookDetails = () => {
               </section>
 
               <section
-                className="generic-book-info"
+                className="generic-book-info tags"
                 title={extractAndMergeNames(data?.book.tags)}
               >
                 <h4>Tags</h4>
@@ -123,18 +127,46 @@ const BookDetails = () => {
                 </p>
               </section>
 
-              <section className="generic-book-info">
+              <section className="generic-book-info publisher">
                 <h4>Publisher</h4>
                 <p>{data?.book.publisher || "Not Available"}</p>
               </section>
 
-              <section className="generic-book-info">
+              <section className="generic-book-info released">
                 <h4>Released</h4>
                 <p>{`
                 ${dateUtil(data?.book.release_date).getDate()}
                 ${months[dateUtil(data?.book.release_date).getMonth() + 1]},
                 ${dateUtil(data?.book.release_date).getFullYear()}`}</p>
               </section>
+            </div>
+
+            <div className="mobile-cart-btn-container">
+              <button
+                type="button"
+                disabled={!data?.book.available_copies}
+                onClick={() => handleAddToCart(data?.book)}
+              >
+                <div>
+                <img src={cartWhite} alt="" />
+                  <div
+                    className={`cart-avail-copies ${
+                      !data?.book.available_copies ? "out-of-stock" : ""
+                    }`}
+                  >
+                    <p>Add to Cart</p>
+                    <span>
+                      {!!data?.book.available_copies
+                        ? `${data?.book.available_copies} Copies Available`
+                        : "Out of Stock"}
+                    </span>
+                  </div>
+
+                </div>
+                  <p className="book-price">
+                    {currencyFormatter(data?.book.price, data?.book.currency)}
+                  </p>
+              </button>
             </div>
 
             <div className="full_description">

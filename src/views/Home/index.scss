@@ -7,9 +7,13 @@
   }
 
   .all-books-wrapper {
-    padding: 0 40px;
+    padding: 0 40px 40px 40px;
     display: flex;
     flex-wrap: wrap;
     gap: 40px;
+
+    @media (max-width: 400px) {
+      padding: 0 30px 40px 30px;
+    }
   }
 }
