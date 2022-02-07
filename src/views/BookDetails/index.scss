@@ -1,6 +1,10 @@
 .book-details-container {
   padding: 40px;
 
+  @media (max-width: 450px) {
+    padding: 40px 20px;
+  }
+
   .back-btn-container {
     margin-bottom: 40px;
 
