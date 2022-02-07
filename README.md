@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/c017412b-ada6-4b2e-aa0a-6fdf2e80f135/deploy-status)](https://app.netlify.com/sites/qbooks/deploys)
+
 # Instructions
 Get featured books buy seasoned authors
 
