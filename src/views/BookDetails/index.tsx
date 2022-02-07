@@ -101,14 +101,16 @@ const BookDetails = () => {
               {currencyFormatter(bookData?.price, bookData?.currency)}
             </p>
 
-            <button
-              disabled={!bookData?.available_copies}
-              type="button"
-              onClick={() => handleAddToCart(bookData)}
-            >
-              <img src={cartWhite} alt="" />
-              <span>Add to Cart</span>
-            </button>
+            {!!bookData?.available_copies && (
+              <button
+                disabled={!bookData?.available_copies}
+                type="button"
+                onClick={() => handleAddToCart(bookData)}
+              >
+                <img src={cartWhite} alt="" />
+                <span>Add to Cart</span>
+              </button>
+            )}
           </aside>
 
           <aside className="book-details">
@@ -162,32 +164,34 @@ const BookDetails = () => {
               </section>
             </div>
 
-            <div className="mobile-cart-btn-container">
-              <button
-                type="button"
-                disabled={!bookData?.available_copies}
-                onClick={() => handleAddToCart(bookData)}
-              >
-                <div>
-                  <img src={cartWhite} alt="" />
-                  <div
-                    className={`cart-avail-copies ${
-                      !bookData?.available_copies ? "out-of-stock" : ""
-                    }`}
-                  >
-                    <p>Add to Cart</p>
-                    <span>
-                      {!!bookData?.available_copies
-                        ? `${bookData?.available_copies} Copies Available`
-                        : "Out of Stock"}
-                    </span>
+            {!!bookData?.available_copies && (
+              <div className="mobile-cart-btn-container">
+                <button
+                  type="button"
+                  disabled={!bookData?.available_copies}
+                  onClick={() => handleAddToCart(bookData)}
+                >
+                  <div>
+                    <img src={cartWhite} alt="" />
+                    <div
+                      className={`cart-avail-copies ${
+                        !bookData?.available_copies ? "out-of-stock" : ""
+                      }`}
+                    >
+                      <p>Add to Cart</p>
+                      <span>
+                        {!!bookData?.available_copies
+                          ? `${bookData?.available_copies} Copies Available`
+                          : "Out of Stock"}
+                      </span>
+                    </div>
                   </div>
-                </div>
-                <p className="book-price">
-                  {currencyFormatter(bookData?.price, bookData?.currency)}
-                </p>
-              </button>
-            </div>
+                  <p className="book-price">
+                    {currencyFormatter(bookData?.price, bookData?.currency)}
+                  </p>
+                </button>
+              </div>
+            )}
 
             <div className="full_description">
               <p>
