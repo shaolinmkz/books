@@ -1,12 +1,18 @@
 import { ReactNode, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 
 const ScrollToTop = ({ children }: { children: ReactNode }) => {
   const location = useLocation();
+  const history = useHistory();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [location]);
+    history.listen(() => {
+      if(history.action === "PUSH") {
+        window.scrollTo(0, 0);
+      }
+    })
+    
+  }, [location, history]);
 
   return <>{children}</>;
 };

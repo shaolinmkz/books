@@ -92,9 +92,9 @@ const BookCarousel = () => {
   useEffect(() => {
     initialize();
 
-    document.body.onresize = () => {
-      initialize();
-    };
+    window.addEventListener("resize", initialize);
+
+    return () => window.removeEventListener("resize", initialize);
   }, [data?.books, initialize]);
 
   return loading ? (

@@ -40,17 +40,26 @@
     }
 
     .available {
-      color: #65C100;
+      color: #65c100;
+    }
+
+    @mixin truncateWord {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      max-width: 150px;
     }
 
     .book-title {
       font-size: var(--fs18);
       text-transform: capitalize;
       margin-bottom: 6px;
+      @include truncateWord();
     }
 
     .author {
       text-transform: capitalize;
+      @include truncateWord();
     }
 
     .sub-title {
@@ -59,12 +68,14 @@
       text-transform: capitalize;
     }
 
-    .genre  {
+    .genre {
       text-transform: capitalize;
+      @include truncateWord();
     }
 
     .tags {
       text-transform: capitalize;
+      @include truncateWord();
     }
   }
 
@@ -75,6 +86,4 @@
       }
     }
   }
-
-
 }
