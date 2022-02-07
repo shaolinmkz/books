@@ -148,7 +148,7 @@ const TopNav = () => {
         </button>
 
         <div className="cart-nav-icon-container">
-          <button type="button">
+          <button type="button" onClick={() => push('/books')}>
             <img alt="" src={whiteLogoIcon} />
           </button>
 
