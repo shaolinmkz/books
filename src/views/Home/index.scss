@@ -12,6 +12,16 @@
     flex-wrap: wrap;
     gap: 40px;
 
+    @media (min-width: 1440px) {
+      display: grid;
+      justify-content: space-between;
+      grid-template-columns: repeat(3, minmax(300px, 403px));
+    }
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+    }
+
     @media (max-width: 400px) {
       padding: 0 30px 40px 30px;
     }
