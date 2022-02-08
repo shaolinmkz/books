@@ -40,7 +40,12 @@
 .books-loader {
   overflow: hidden;
   display: flex;
-  margin-bottom: 40px;
+
+  @media (max-width: 768px) {
+    &:last-child {
+      display: none;
+    }
+  }
 
   > div {
     justify-content: space-between;
@@ -61,9 +66,7 @@
       overflow: hidden;
 
       @media (max-width: 768px) {
-        min-width: 300px;
         width: 100%;
-        max-width: 400px;
       }
 
       @include shimmer-loader();

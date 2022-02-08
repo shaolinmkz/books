@@ -41,6 +41,7 @@ const Home = () => {
           <>
             <BooksLoader />
             <BooksLoader />
+            <BooksLoader />
           </>
         ) : (
           books.map((book: IBooks) => (
