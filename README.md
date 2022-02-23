@@ -1,5 +1,5 @@
 # Instructions
-[![Netlify Status](https://api.netlify.com/api/v1/badges/c017412b-ada6-4b2e-aa0a-6fdf2e80f135/deploy-status)](ttps://qbooks.netlify.app)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/c017412b-ada6-4b2e-aa0a-6fdf2e80f135/deploy-status)](https://qbooks.netlify.app)
 
 
 Deployed Link: [qbooks](https://qbooks.netlify.app)
@@ -22,3 +22,6 @@ Deployed Link: [qbooks](https://qbooks.netlify.app)
 ## Feedback
 - The assessment was great and flexible, giving room for self-innovation and I really enjoyed it.
 - It will be nice if the `Add to Cart` buttons on the index page has a visible clickable area.
+
+## Screenshot
+<img src="https://res.cloudinary.com/shaolinmkz/image/upload/v1644250807/Random-Icons/qbooks.png" alt="q-books" width="500" />

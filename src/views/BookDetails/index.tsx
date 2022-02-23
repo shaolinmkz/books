@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, useLocation } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 
 import { GET_BOOK, GET_BOOKS } from "../../gql/queries";
@@ -9,8 +9,13 @@ import cartWhite from "../../assets/cart-white.svg";
 import peopleBlack from "../../assets/people-black.svg";
 import likeBlack from "../../assets/like-black.svg";
 import { BooksLoader } from "../../components/Loaders";
-import { currencyFormatter, dateUtil, findBookMatch } from "../../utils";
-import { extractAndMergeNames } from "../../utils/index";
+import {
+  currencyFormatter,
+  dateUtil,
+  extractQueryValue,
+  findBookMatch,
+  extractAndMergeNames,
+} from "../../utils";
 import LikesAndRating from "../../components/LikesAndRating";
 import { useAppData } from "../../hooks/useAppData";
 import {
@@ -36,6 +41,7 @@ const months = [
 ];
 
 const BookDetails = () => {
+  const { search } = useLocation();
   const { goBack } = useHistory();
   const { dispatch, books } = useAppData();
   const { bookId } = useParams<{ bookId: string }>();
@@ -164,7 +170,7 @@ const BookDetails = () => {
               </section>
             </div>
 
-            {!!bookData?.available_copies && (
+            {!!bookData?.available_copies && !extractQueryValue(search) && (
               <div className="mobile-cart-btn-container">
                 <button
                   type="button"
