@@ -90,72 +90,74 @@ const TopNav = () => {
   return (
     <>
       <header className="header">
-        <Link to="/" className="logo-container">
-          <img alt="" src={blackLogoIcon} />
+        <div className="header_wrapper">
+          <Link to="/" className="logo-container">
+            <img alt="" src={blackLogoIcon} />
 
-          <div className="logo-text">
-            <h2>Quidax Books</h2>
-            <p>A flimsy book company</p>
-          </div>
-        </Link>
-
-        <div className="desktop">
-          <SearchInput
-            onClear={handleClear}
-            onChange={triggerSearch}
-            value={extractQueryValue(search)}
-          />
-        </div>
-
-        {inputOpen && (
-          <div
-            className={
-              !!extractQueryValue(search)
-                ? "mobile mobile-modal searching"
-                : "mobile mobile-modal"
-            }
-            onClick={() => showSearchInput(false)}
-          >
-            <div
-              className="search-modal-header"
-              onClick={(event) => event.stopPropagation()}
-            >
-              <section className="mobile-search-wrapper">
-                <button
-                  type="button"
-                  className="back-search-btn"
-                  onClick={() => showSearchInput(false)}
-                >
-                  <img alt="" src={backIcon} />
-                </button>
-
-                <SearchInput
-                  onClear={handleClear}
-                  onChange={triggerSearch}
-                  value={extractQueryValue(search)}
-                />
-              </section>
+            <div className="logo-text">
+              <h2>Quidax Books</h2>
+              <p>A flimsy book company</p>
             </div>
+          </Link>
+
+          <div className="desktop">
+            <SearchInput
+              onClear={handleClear}
+              onChange={triggerSearch}
+              value={extractQueryValue(search)}
+            />
           </div>
-        )}
 
-        <button
-          type="button"
-          className="mobile-search-btn"
-          onClick={() => showSearchInput(true)}
-        >
-          <img alt="" src={searchIcon} />
-        </button>
+          {inputOpen && (
+            <div
+              className={
+                !!extractQueryValue(search)
+                  ? "mobile mobile-modal searching"
+                  : "mobile mobile-modal"
+              }
+              onClick={() => showSearchInput(false)}
+            >
+              <div
+                className="search-modal-header"
+                onClick={(event) => event.stopPropagation()}
+              >
+                <section className="mobile-search-wrapper">
+                  <button
+                    type="button"
+                    className="back-search-btn"
+                    onClick={() => showSearchInput(false)}
+                  >
+                    <img alt="" src={backIcon} />
+                  </button>
 
-        <div className="cart-nav-icon-container">
-          <button type="button" onClick={() => push('/books')}>
-            <img alt="" src={whiteLogoIcon} />
+                  <SearchInput
+                    onClear={handleClear}
+                    onChange={triggerSearch}
+                    value={extractQueryValue(search)}
+                  />
+                </section>
+              </div>
+            </div>
+          )}
+
+          <button
+            type="button"
+            className="mobile-search-btn"
+            onClick={() => showSearchInput(true)}
+          >
+            <img alt="" src={searchIcon} />
           </button>
 
-          <button type="button" onClick={() => handleOpenCloseCart(true)}>
-            <img alt="" src={cartIcon} />
-            {!!cart.length && <span>{calculateCartSize(cart)}</span>}
-          </button>
+          <div className="cart-nav-icon-container">
+            <button type="button" onClick={() => push('/books')}>
+              <img alt="" src={whiteLogoIcon} />
+            </button>
+
+            <button type="button" onClick={() => handleOpenCloseCart(true)}>
+              <img alt="" src={cartIcon} />
+              {!!cart.length && <span>{calculateCartSize(cart)}</span>}
+            </button>
+          </div>
         </div>
       </header>
       <Cart />
