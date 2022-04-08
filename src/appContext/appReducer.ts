@@ -9,6 +9,9 @@ import {
   SEARCH_INPUT_OPEN,
   GET_ALL_BOOKS,
 } from "./types";
+import hardCodedBooks from '../fallbackData.json';
+
+const { data: fallBackData } = hardCodedBooks;
 
 
 interface IAction {
@@ -21,7 +24,7 @@ export const initialState = {
   cart: [] as ICartBook[],
   dispatch: (() => { }) as Dispatch<IAction>,
   searchedBooks: [] as (IBooks[] | []),
-  books: [] as (IBooks[] | []),
+  books: fallBackData as (IBooks[] | []),
   searchInputOpen: false,
 };
 

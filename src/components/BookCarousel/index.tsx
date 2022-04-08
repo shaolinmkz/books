@@ -7,6 +7,7 @@ import { IFeaturedBooks } from "../../interfaces";
 import { HorizontalSkeletonLoader } from "../Loaders";
 import CarouselPositionIndicator from "./CarouselPositionIndicator";
 import "./index.scss";
+import { useAppData } from "../../hooks/useAppData";
 
 interface IBookPosition {
   active: boolean;
@@ -18,6 +19,7 @@ const BookCarousel = () => {
     scrollValue: 0,
     clickValue: 0,
   });
+  const { books } = useAppData();
   const [positions, setPositions] = useState<IBookPosition[]>([]);
   const carouselRef = useRef<HTMLDivElement | null>(null);
   const { loading, data } = useQuery(GET_FEATURED_BOOKS, {
@@ -26,8 +28,10 @@ const BookCarousel = () => {
     },
   });
 
+  const resolvedFeaturedData = data?.books || books.filter(({ featured }) => featured)
+
   const getResolvedScreenValues = useCallback(() => {
-    const numberOfFeaturedBooks = data?.books.length;
+    const numberOfFeaturedBooks = resolvedFeaturedData.length;
     const windowWidth = window.innerWidth;
     const bookWidth = windowWidth <= 768 ? 145 : 240;
     const scrollWidth = carouselRef.current?.scrollWidth;
@@ -42,7 +46,7 @@ const BookCarousel = () => {
       visibleBooksOnscreen,
       maxClickable,
     };
-  }, [data?.books.length]);
+  }, [resolvedFeaturedData.length]);
 
   const handleClick = (direction: number) => {
     const { scrollWidth, visibleBooksOnscreen, maxClickable, bookWidth } =
@@ -78,16 +82,16 @@ const BookCarousel = () => {
   };
 
   const initialize = useCallback(() => {
-    if (data?.books) {
+    if (resolvedFeaturedData) {
       const { visibleBooksOnscreen } = getResolvedScreenValues();
       setPositions(
-        data.books.map((_: IFeaturedBooks, index: number) => ({
+        resolvedFeaturedData.map((_: IFeaturedBooks, index: number) => ({
           id: index + 1,
           active: index + 1 === visibleBooksOnscreen ? true : false,
         }))
       );
     }
-  }, [data?.books, getResolvedScreenValues]);
+  }, [resolvedFeaturedData, getResolvedScreenValues]);
 
   useEffect(() => {
     initialize();
@@ -95,7 +99,8 @@ const BookCarousel = () => {
     window.addEventListener("resize", initialize);
 
     return () => window.removeEventListener("resize", initialize);
-  }, [data?.books, initialize]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return loading ? (
     <HorizontalSkeletonLoader />
@@ -109,7 +114,7 @@ const BookCarousel = () => {
       </button>
 
       <div className="carousel" ref={carouselRef}>
-        {data?.books.map((book: IFeaturedBooks) => (
+        {resolvedFeaturedData.map((book: IFeaturedBooks) => (
           <div key={book.id}>
             <FeaturedBookCard book={book} />
           </div>

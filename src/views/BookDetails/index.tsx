@@ -56,23 +56,25 @@ const BookDetails = () => {
     },
   });
 
+  const bookResponseData = data?.book || books.find(({ id }) => `${id}` === bookId);
+
   const handleAddToCart = (book?: IBooks) => {
     dispatch({ type: ADD_TO_CART, payload: book });
     dispatch({ type: OPEN_CLOSE_CART, payload: true });
   };
 
   const bookData: IBooks = {
-    ...data?.book,
+    ...bookResponseData,
     available_copies:
       findBookMatch(data?.book.id, books)?.available_copies ??
       data?.book?.available_copies,
   };
 
   useEffect(() => {
-    if (bookResponse?.books && !loadingAllBooks && !books.length) {
-      dispatch({ type: GET_ALL_BOOKS, payload: bookResponse?.books });
+    if (bookResponse?.books  && !loadingAllBooks && !books.length) {
+      dispatch({ type: GET_ALL_BOOKS, payload: bookResponse?.books  });
     }
-  }, [bookResponse?.books, loadingAllBooks, dispatch, books.length]);
+  }, [bookResponse?.books , loadingAllBooks, dispatch, books.length]);
 
   return (
     <div className="book-details-container">

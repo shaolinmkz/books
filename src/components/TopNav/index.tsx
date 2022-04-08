@@ -75,17 +75,19 @@ const TopNav = () => {
     dispatch({ type: SEARCH_INPUT_OPEN, payload: value });
   };
 
+  const booksResponse = data?.books || allBooks;
+
   useEffect(() => {
-    const ready = !!data?.books && !!extractQueryValue(search);
+    const ready = !!booksResponse && !!extractQueryValue(search);
 
     if (ready) {
-      dispatch({ type: GET_ALL_BOOKS, payload: data.books });
+      dispatch({ type: GET_ALL_BOOKS, payload: booksResponse });
 
-      combineBookSearch(allBooks, search).then((books) => {
+      combineBookSearch(booksResponse, search).then((books) => {
         dispatch({ type: SEARCH_BOOKS, payload: books });
       });
     }
-  }, [allBooks, data?.books, dispatch, search]);
+  }, [booksResponse, data?.books, dispatch, search]);
 
   return (
     <>
