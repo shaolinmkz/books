@@ -32,7 +32,7 @@ const BookCarousel = () => {
 
   const getResolvedScreenValues = useCallback(() => {
     const numberOfFeaturedBooks = resolvedFeaturedData.length;
-    const windowWidth = window.innerWidth;
+    const windowWidth = window.innerWidth > 1440 ? 1440 : window.innerWidth;
     const bookWidth = windowWidth <= 768 ? 145 : 240;
     const scrollWidth = carouselRef.current?.scrollWidth;
     const visibleBooksOnscreen = Math.floor(windowWidth / bookWidth);
