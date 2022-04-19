@@ -24,7 +24,7 @@ export const initialState = {
   cart: [] as ICartBook[],
   dispatch: (() => { }) as Dispatch<IAction>,
   searchedBooks: [] as (IBooks[] | []),
-  books: fallBackData as (IBooks[] | []),
+  books: [ ...fallBackData ] as (IBooks[] | []),
   searchInputOpen: false,
 };
 

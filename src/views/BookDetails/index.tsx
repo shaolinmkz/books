@@ -13,7 +13,6 @@ import {
   currencyFormatter,
   dateUtil,
   extractQueryValue,
-  findBookMatch,
   extractAndMergeNames,
 } from "../../utils";
 import LikesAndRating from "../../components/LikesAndRating";
@@ -56,7 +55,8 @@ const BookDetails = () => {
     },
   });
 
-  const bookResponseData = data?.book || books.find(({ id }) => `${id}` === bookId);
+  const foodBook = books.find(({ id }) => id === bookId);
+  const bookResponseData = data?.book || foodBook;
 
   const handleAddToCart = (book?: IBooks) => {
     dispatch({ type: ADD_TO_CART, payload: book });
@@ -66,15 +66,14 @@ const BookDetails = () => {
   const bookData: IBooks = {
     ...bookResponseData,
     available_copies:
-      findBookMatch(data?.book.id, books)?.available_copies ??
-      data?.book?.available_copies,
+      foodBook?.available_copies ?? data?.book?.available_copies,
   };
 
   useEffect(() => {
-    if (bookResponse?.books  && !loadingAllBooks && !books.length) {
-      dispatch({ type: GET_ALL_BOOKS, payload: bookResponse?.books  });
+    if (bookResponse?.books && !loadingAllBooks && !books.length) {
+      dispatch({ type: GET_ALL_BOOKS, payload: bookResponse?.books });
     }
-  }, [bookResponse?.books , loadingAllBooks, dispatch, books.length]);
+  }, [bookResponse?.books, loadingAllBooks, dispatch, books.length]);
 
   return (
     <div className="book-details-container">
